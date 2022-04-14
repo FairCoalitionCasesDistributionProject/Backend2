@@ -19,7 +19,7 @@ It is strongly recommanded to use python virtual enviorment.<br />
 ``` pip install -r requirements.txt```
 
 ## Running local server
-In the main directory run:<br />
+at the main directory run:<br />
 ``` python manage.py runserver ```<br />
 
 Which can be viewed at the url:<br /> http://127.0.0.1:8000/api/ <br />
@@ -27,6 +27,6 @@ Which can be viewed at the url:<br /> http://127.0.0.1:8000/api/ <br />
 Send a json using the format: <br />
 ``` {"key": "1.1.1.1.1.1.1", "items": 2, "mandates": [1, 1], "preferences": [[1, 1, 1], [1, 1, 1], [1, 1, 1]] ```
 
-## To run unit tests in /api/tests.py
-In the main directory run:<br />
+## To run unit tests at /api/tests.py
+at the main directory run:<br />
 ``` python manage.py test ```
