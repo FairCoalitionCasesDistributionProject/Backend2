@@ -21,7 +21,7 @@ class AccountTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, -1)
 
-    def test_retriving_session(self):
+    def test_retrieving_session(self):
         data = {'key': '3.3.3.3.3.3.3', 'items': 3, 'mandates': [1, 2, 3], 'preferences': [[1, 2, 3], [2, 1, 3], [3, 2, 1]]}
         respone = self.client.post("https://faircol.herokuapp.com/api/", data, format='json')
         self.assertEqual(respone.status_code, status.HTTP_200_OK)
@@ -30,13 +30,13 @@ class AccountTests(APITestCase):
         self.assertEqual(respone.status_code, status.HTTP_200_OK)
         self.assertEqual(respone.data, "[[1, 2, 3], [2, 1, 3], [3, 2, 1]]")
         
-    def test_retriving_nonexisting_session(self):
+    def test_retrieving_nonexisting_session(self):
         data = {'key': 'Not.a.key.at.all'}
         respone = self.client.post("https://faircol.herokuapp.com/api/getsave", data, format='json')
         self.assertEqual(respone.status_code, status.HTTP_200_OK)
         self.assertEqual(respone.data, -1)
     
-    def test_retriving_not_a_json_key_session(self):
+    def test_retrieving_not_a_json_key_session(self):
         data = "not json"
         respone = self.client.post("https://faircol.herokuapp.com/api/getsave", data, format='json')
         self.assertEqual(respone.status_code, status.HTTP_200_OK)
