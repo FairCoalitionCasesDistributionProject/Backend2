@@ -31,7 +31,7 @@ def AlgoResponseView(request):
         div = Division(number_of_items=request.data['items'])
         div.add_parties([(i, request.data['mandates'][i]) for i in range(len(prefs))])
         for i in range(len(prefs)):
-            div.set_party_preferences(i, prefs[i])
+            div.set_party_preferences(i, normalize(prefs[i]))
         return Response(str(transpose(bundle_to_matrix(div.divide()))).replace("[","{").replace("]","}"))
     except:
         return Response(-1)

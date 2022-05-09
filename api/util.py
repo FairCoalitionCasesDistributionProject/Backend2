@@ -1,6 +1,6 @@
 def normalize(lst: list):
     s = sum(lst)
-    return [round(100 * i / s, 2) for i in lst]
+    return [round(100 * i / s, 3) for i in lst]
 
 
 def bundle_to_matrix(allocation):
