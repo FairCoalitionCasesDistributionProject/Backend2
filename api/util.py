@@ -1,5 +1,7 @@
 def normalize(lst: list):
     s = sum(lst)
+    if s == 0:
+        return lst
     return [round(100 * i / s, 3) for i in lst]
 
 

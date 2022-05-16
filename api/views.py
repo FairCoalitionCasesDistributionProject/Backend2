@@ -25,6 +25,7 @@ database=firebase.database()
 def AlgoResponseView(request):
     try:
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
+            print("Invalid Input")
             return Response(-1)
         database.child(request.data['key'].replace('.','/')).set(str(request.data['preferences']))
         prefs = request.data['preferences']
@@ -33,7 +34,7 @@ def AlgoResponseView(request):
         for i in range(len(prefs)):
             div.set_party_preferences(i, normalize(prefs[i]))
         return Response(str(transpose(bundle_to_matrix(div.divide()))).replace("[","{").replace("]","}"))
-    except:
+    except Exception as e: 
         return Response(-1)
 
 @api_view(['POST'])
