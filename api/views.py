@@ -28,9 +28,11 @@ def AlgoResponseView(request):
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
             print("Invalid Input")
             return Response(-1)
-        database.child(request.data['key'].replace('.','/')).set(request.data['preferences'])
         if request.data['type'] is not None and isinstance(request.data['type'], int) and request.data['type'] == 0:
             database.child(request.data['key'].replace('.','/')).set(json.dumps(request.data))
+        else:
+            database.child(request.data['key'].replace('.','/')).set(request.data['preferences'])
+        
             
         prefs = request.data['preferences']
         div = Division(number_of_items=request.data['items'])
