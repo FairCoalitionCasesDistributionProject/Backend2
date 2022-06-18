@@ -1,6 +1,6 @@
 # Running and installing
-## First clone the repository
-``` git clone  https://github.com/FairCoalitionCasesDistributionProject/Backend.git```
+## Clone the repository
+``` git clone https://github.com/FairCoalitionCasesDistributionProject/Backend.git```
 
 ## Setting a virtual enviorment
 It is strongly recommanded to use python virtual enviorment.<br />
