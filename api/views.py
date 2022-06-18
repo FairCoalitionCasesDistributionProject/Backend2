@@ -1,3 +1,4 @@
+from matplotlib.font_manager import json_dump
 import pyrebase
 import os
 from rest_framework.response import Response
@@ -5,7 +6,7 @@ from rest_framework.decorators import api_view
 from .division import Division
 from .util import *
 from .inputcheck import isvalidinput
-# Create your views here.
+import json
 
 config = {
     "apiKey": "AIzaSyBrRTqVU9Nk4tMFfKW1aAYs4V3BkmNr8PM",
@@ -27,10 +28,14 @@ def AlgoResponseView(request):
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
             print("Invalid Input")
             return Response(-1)
-        database.child(request.data['key'].replace('.','/')).set(str(request.data['preferences']))
+        database.child(request.data['key'].replace('.','/')).set(request.data['preferences'])
+        if request.data['type'] is not None and isinstance(request.data['type'], int) and request.data['type'] == 0:
+            database.child(request.data['key'].replace('.','/')).set(json.dumps(request.data))
+            
         prefs = request.data['preferences']
         div = Division(number_of_items=request.data['items'])
         div.add_parties([(i, request.data['mandates'][i]) for i in range(len(prefs))])
+            
         for i in range(len(prefs)):
             div.set_party_preferences(i, normalize(prefs[i]))
         return Response(str(transpose(bundle_to_matrix(div.divide()))).replace("[","{").replace("]","}"))
@@ -45,6 +50,6 @@ def ReturnSaveView(request):
         data = database.child(request.data['key'].replace('.','/')).get().val()
         if not isinstance(data,str):
             return Response(-1)
-        return Response(database.child(request.data['key'].replace('.','/')).get().val())
+        return Response(data)
     except:
         return Response(-1)
