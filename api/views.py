@@ -28,10 +28,10 @@ def AlgoResponseView(request):
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
             print("Invalid Input")
             return Response(-1)
-        if request.data['type'] is not None and isinstance(request.data['type'], int) and request.data['type'] == 0:
+        if 'type' in request.data.keys() and isinstance(request.data['type'], int) and request.data['type'] == 0:
             database.child(request.data['key'].replace('.','/')).set(json.dumps(request.data))
         else:
-            database.child(request.data['key'].replace('.','/')).set(request.data['preferences'])
+            database.child(request.data['key'].replace('.','/')).set(str(request.data['preferences']))
         
             
         prefs = request.data['preferences']
@@ -42,6 +42,7 @@ def AlgoResponseView(request):
             div.set_party_preferences(i, normalize(prefs[i]))
         return Response(str(transpose(bundle_to_matrix(div.divide()))).replace("[","{").replace("]","}"))
     except Exception as e: 
+        print("Error: ", e)
         return Response(-1)
 
 @api_view(['POST'])
