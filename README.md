@@ -1,32 +1,38 @@
-# Running and installing
-## Clone the repository
+# About
+Backend of our [project](https://github.com/FairCoalitionCasesDistributionProject), made using [Django Rest Framework](https://www.django-rest-framework.org). Used to evaluate a fair division using [Fairpy](https://github.com/erelsgl/fairpy) implementations as well as to save/restore user sessions using [Firebase](https://firebase.google.com/) database.<br />
+Deployed with [Heroku](https://www.heroku.com/). <br />
+
+
+## Running and Installing Guide
+* Clone Repository <br /> 
 ``` git clone https://github.com/FairCoalitionCasesDistributionProject/Backend.git```
 
-## Setting a virtual enviorment
+* Virtual Enviorment Setup
 It is strongly recommanded to use python virtual enviorment.<br />
-### Install
+[More information](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
+  * Installation
 ``` pip install --user virtualenv```
 
-### Create
+  * Creation
 ``` python -m venv env ```
 
-### Activate
+  * Activation
 ``` .\env\Scripts\activate ```
 
-[More information](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
 
-## Installing dependencies
+* Dependencies installation
 ``` pip install -r requirements.txt```
 
-## Running local server
-At the main directory run:<br />
+### Running Local Server
+Run at the main directory:<br />
 ``` python manage.py runserver ```<br />
 
-Which can be viewed at the url:<br /> http://127.0.0.1:8000/api/ <br />
+Can be viewed at the url:<br /> 
+http://127.0.0.1:8000/api/ <br />
 <br />
-Send a json using the format: <br />
-``` {"key": "1.1.1.1.1.1.1", "items": 2, "mandates": [1, 1], "preferences": [[1, 1], [1, 1]]} ```
+At the form send a json using the format: <br />
+``` {"key": "1.1", "items": 3, "mandates": [1, 1], "preferences": [[1, 1, 1], [1, 1, 1]]} ```
 
-## To run unit tests at /api/tests.py
+### Running Unit Tests at /api/tests.py
 At the main directory run:<br />
 ``` python manage.py test ```
