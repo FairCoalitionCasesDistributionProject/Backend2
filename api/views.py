@@ -1,3 +1,4 @@
+from cProfile import run
 from matplotlib.font_manager import json_dump
 import pyrebase
 import os
@@ -22,11 +23,10 @@ firebase=pyrebase.initialize_app(config)
 authe = firebase.auth()
 database=firebase.database()
 
-def run_algo(request):
+def run_algo(request, type):
     try:
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
-            print("Invalid Input")
-            return Response(-1)
+            return Response("Invalid Input")
         if 'type' in request.data.keys() and isinstance(request.data['type'], int) and request.data['type'] == 0:
             database.child(request.data['key'].replace('.','/')).set(json.dumps(request.data))
         else:
@@ -38,20 +38,22 @@ def run_algo(request):
             
         for i in range(len(prefs)):
             div.set_party_preferences(i, normalize(prefs[i]))
-        return transpose(bundle_to_matrix(div.divide()))
+        allocation = transpose(bundle_to_matrix(div.divide()))
+        if type == 0:
+            return Response(str(allocation).replace("[","{").replace("]","}"))
+        else:
+            return Response({"allocation": allocation, "rounded_allocation": round_allocation(allocation)})
         
     except Exception as e: 
-        print("Error: ", e)
-        return Response(-1)
+        return Response("Encountered an error: " + str(e))
 
 @api_view(['POST'])
 def AlgoResponseView(request):
-    return Response(str(run_algo(request)).replace("[","{").replace("]","}"))
+    return run_algo(request, 0)
 
 @api_view(['POST'])
 def AlgoResponseTestView(request):
-    allocation = run_algo(request)
-    return Response({"allocation": allocation, "rounded_allocation": round_allocation(allocation)})
+    return run_algo(request, 1)
 
 @api_view(['POST'])
 def ReturnSaveView(request):
