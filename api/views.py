@@ -22,8 +22,7 @@ firebase=pyrebase.initialize_app(config)
 authe = firebase.auth()
 database=firebase.database()
 
-@api_view(['POST'])
-def AlgoResponseView(request):
+def run_algo(request):
     try:
         if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
             print("Invalid Input")
@@ -39,12 +38,20 @@ def AlgoResponseView(request):
             
         for i in range(len(prefs)):
             div.set_party_preferences(i, normalize(prefs[i]))
-        allocation = transpose(bundle_to_matrix(div.divide()))
-        return Response({"allocation": allocation, "rounded_allocation": round_allocation(allocation)})
+        return transpose(bundle_to_matrix(div.divide()))
         
     except Exception as e: 
         print("Error: ", e)
         return Response(-1)
+
+@api_view(['POST'])
+def AlgoResponseView(request):
+    return Response(str(run_algo(request)).replace("[","{").replace("]","}"))
+
+@api_view(['POST'])
+def AlgoResponseTestView(request):
+    allocation = run_algo(request)
+    return Response({"allocation": allocation, "rounded_allocation": round_allocation(allocation)})
 
 @api_view(['POST'])
 def ReturnSaveView(request):
