@@ -6,5 +6,4 @@ urlpatterns = [
     path('', views.AlgoResponseView),
     path('getsave', views.ReturnSaveView),
     path('test', views.AlgoResponseTestView),
-    path('testt', views.AlgoResponseTestView),
 ]
