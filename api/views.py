@@ -1,13 +1,11 @@
-from cProfile import run
-from matplotlib.font_manager import json_dump
-import pyrebase
-import os
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+import pyrebase
+import json
 from .division import Division
 from .util import *
 from .inputcheck import isvalidinput
-import json
+
 
 config = {
     "apiKey": "AIzaSyBrRTqVU9Nk4tMFfKW1aAYs4V3BkmNr8PM",
