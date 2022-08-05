@@ -10,13 +10,13 @@ Deployed with [Heroku](https://www.heroku.com/). <br />
 * Virtual Enviorment Setup
 It is strongly recommanded to use python virtual enviorment.<br />
 [More information](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
-  * Installation
+  * Installation <br />
 ``` pip install --user virtualenv```
 
-  * Creation
+  * Creation <br />
 ``` python -m venv env ```
 
-  * Activation
+  * Activation <br />
 ``` .\env\Scripts\activate ```
 
 
