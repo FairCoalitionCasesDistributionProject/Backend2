@@ -25,13 +25,13 @@ class AccountTests(APITestCase):
         data = {'key': '1.1.1.1.1.1.1', 'items': 3, 'mandates': [1, 2, 3], 'preferences': [[2, 1, 3], [3, 2, 1]]}
         response = self.client.post("https://faircol.herokuapp.com/api/", data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, -1)
+        self.assertEqual(response.data, 'Invalid Input')
 
     def test_send_not_json_request(self):
         data = "not json"
         response = self.client.post("https://faircol.herokuapp.com/api/", data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, -1)
+        self.assertEqual(response.data, 'Invalid Input')
 
     def test_retrieving_session(self):
         data = {'key': '3.3.3.3.3.3.3', 'items': 3, 'mandates': [1, 2, 3], 'preferences': [[1, 2, 3], [2, 1, 3], [3, 2, 1]]}
