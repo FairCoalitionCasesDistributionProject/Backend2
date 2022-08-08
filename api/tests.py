@@ -5,13 +5,13 @@ from rest_framework.test import APITestCase
 class AccountTests(APITestCase):
     def test_send_json_request1(self):
         data = {'key': '1.1.1.1.1.1.1', 'items': 2, 'mandates': [1, 1], 'preferences': [[1, 1], [1, 1]]}
-        response = self.client.post("https://faircol.herokuapp.com/api/", data, format='json')
+        response = self.client.post("https://faircol.herokuapp.com/api/test", data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, {"allocation": [[0,1.0], [1.0, 0]], "rounded_allocation": [[0,1.0], [1.0, 0]]})
         
     def test_send_json_request2(self):
         data = {'key': '1.1.1.1.1.1.1', 'items': 1, 'mandates': [4, 3, 1], 'preferences': [[1], [1], [1]]}
-        response = self.client.post("https://faircol.herokuapp.com/api/", data, format='json')
+        response = self.client.post("https://faircol.herokuapp.com/api/test", data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, {"allocation": [[0.5, 0.38, 0.12]], "rounded_allocation": [[0.57, 0.43, 0]]})
         
