@@ -22,18 +22,18 @@ firebase=pyrebase.initialize_app(config)
 authe = firebase.auth()
 database=firebase.database()
 
-def run_algo(request, type):
+def run_algo(json_data, type):
     try:
-        if not isinstance(request.data, dict) or not isvalidinput(request.data) or not isinstance(request.data['key'],str):
+        if not isinstance(json_data, dict) or not isvalidinput(json_data) or not isinstance(json_data['key'],str):
             return Response("Invalid Input")
-        if 'type' in request.data.keys() and isinstance(request.data['type'], int) and request.data['type'] == 0:
-            database.child(request.data['key'].replace('.','/')).set(json.dumps(request.data))
+        if 'type' in json_data.keys() and isinstance(json_data['type'], int) and json_data['type'] == 0:
+            database.child(json_data['key'].replace('.','/')).set(json.dumps(json_data))
         else:
-            database.child(request.data['key'].replace('.','/')).set(str(request.data['preferences']))
+            database.child(json_data['key'].replace('.','/')).set(str(json_data['preferences']))
         
-        prefs = request.data['preferences']
-        div = Division(number_of_items=request.data['items'])
-        div.add_parties([(i, request.data['mandates'][i]) for i in range(len(prefs))])
+        prefs = json_data['preferences']
+        div = Division(number_of_items=json_data['items'])
+        div.add_parties([(i, json_data['mandates'][i]) for i in range(len(prefs))])
             
         for i in range(len(prefs)):
             div.set_party_preferences(i, normalize(prefs[i]))
@@ -48,11 +48,11 @@ def run_algo(request, type):
 
 @api_view(['POST'])
 def AlgoResponseView(request):
-    return run_algo(request, 0)
+    return run_algo(request.data, 0)
 
 @api_view(['POST'])
 def AlgoResponseTestView(request):
-    return run_algo(request, 1)
+    return run_algo(request.data, 1)
 
 @api_view(['POST'])
 def ReturnSaveView(request):
@@ -68,4 +68,7 @@ def ReturnSaveView(request):
     
 class FormTestView(APIView):
     def post(self, request):
-        return Response(request.data)
+        if "isinstance(request.data, dict)" and "_content" in request.data.keys():
+            return Response(json.loads(request.data))
+        else:
+            return Response(request.data)
