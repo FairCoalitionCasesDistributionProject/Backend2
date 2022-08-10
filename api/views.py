@@ -48,14 +48,14 @@ def run_algo(json_data, type):
 
 @api_view(['POST'])
 def AlgoResponseView(request):
-    if "isinstance(request.data, dict)" and "_content" in request.data.keys() and isinstance(request.data['_content'], str):
+    if isinstance(request.data, dict) and "_content" in request.data.keys() and isinstance(request.data['_content'], str):
             return run_algo(json.loads(request.data['_content']), 0)
     else:
         return run_algo(request.data, 0)
 
 @api_view(['POST'])
 def AlgoResponseTestView(request):
-    if "isinstance(request.data, dict)" and "_content" in request.data.keys() and isinstance(request.data['_content'], str):
+    if isinstance(request.data, dict) and "_content" in request.data.keys() and isinstance(request.data['_content'], str):
             return run_algo(json.loads(request.data['_content']), 1)
     else:
         return run_algo(request.data, 1)
