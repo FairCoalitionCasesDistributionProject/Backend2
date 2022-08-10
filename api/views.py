@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 import pyrebase
 import json
@@ -64,3 +65,7 @@ def ReturnSaveView(request):
         return Response(data)
     except:
         return Response(-1)
+    
+class FormTestView(APIView):
+    def post(self, request):
+        return run_algo(request, 1)
