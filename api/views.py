@@ -68,4 +68,4 @@ def ReturnSaveView(request):
     
 class FormTestView(APIView):
     def post(self, request):
-        return run_algo(request, 1)
+        return Response(request.data)
