@@ -68,7 +68,7 @@ def ReturnSaveView(request):
     
 class FormTestView(APIView):
     def post(self, request):
-        if "isinstance(request.data, dict)" and "_content" in request.data.keys():
-            return Response(json.loads(request.data['_content']))
+        if "isinstance(request.data, dict)" and "_content" in request.data.keys() and isinstance(request.data['_content'], str):
+            return run_algo(json.loads(request.data['_content']), 1)
         else:
-            return Response(request.data)
+            return run_algo(request.data, 1)
