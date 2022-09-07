@@ -7,9 +7,9 @@ Deployed with [Heroku](https://www.heroku.com/). <br />
 * Clone Repository <br /> 
 ``` git clone https://github.com/FairCoalitionCasesDistributionProject/Backend.git```
 
-* Virtual Enviorment Setup
-It is strongly recommanded to use python virtual enviorment.<br />
-[More information](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
+
+* Virtual Enviorment Setup<br />
+It is strongly recommended to use python virtual enviorment. [For more information.](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
   * Installation <br />
 ``` pip install --user virtualenv```
 
