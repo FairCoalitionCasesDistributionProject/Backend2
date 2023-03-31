@@ -1,5 +1,5 @@
 class Political_party:
-    def __init__(self, id:int, mandates: int, preferences: list[float] = []):
+    def __init__(self, id, mandates, preferences = []):
         if mandates == 0:
             raise Exception("A party cannot have 0 mandates")
         self.id = id
