@@ -15,7 +15,7 @@ class Political_party:
     def getpreferences(self):
         return self.preferences
 
-    def setpreferences(self, new_preferences: list[float]):
+    def setpreferences(self, new_preferences):
         self.preferences = new_preferences
 
     def __eq__(self, other):
