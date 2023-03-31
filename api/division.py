@@ -11,7 +11,7 @@ class Division:
         self.num_of_parties = len(parties)
         self.number_of_mandates = sum([party.getmandates() for party in parties])
 
-    def get_preferences(self)->list[list[float]]:
+    def get_preferences(self):
         return [party.getpreferences() for party in self.parties]
 
     def get_parties(self)->list[Political_party]:
