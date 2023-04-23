@@ -36,3 +36,9 @@ At the form send a json using the format: <br />
 ### Running Unit Tests at /api/tests.py
 At the main directory run:<br />
 ``` python manage.py test ```
+
+
+
+
+
+
