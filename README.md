@@ -1,6 +1,6 @@
 # About
 Backend of our [project](https://github.com/FairCoalitionCasesDistributionProject), made using [Django Rest Framework](https://www.django-rest-framework.org). Used to evaluate a fair division using [Fairpy](https://github.com/erelsgl/fairpy) implementations as well as to save/restore user sessions using [Firebase](https://firebase.google.com/) database.<br />
-Deployed with [Heroku](https://www.heroku.com/). <br />
+Deployed with [Render](https://render.com/). <br />
 
 
 ## Running and Installing Guide
