@@ -19,6 +19,15 @@ It is strongly recommended to use python virtual enviorment. [For more informati
   * Activation <br />
 ``` .\env\Scripts\activate ```
 
+* For Linux <br />
+  * Instal the virtual enviorment <br />
+  ``` pip install virtualenv ```
+
+  * Creation <br />
+  ``` virtualenv env ```
+
+  * Activation <br />
+  ``` source env/bin/activate ```
 
 * Dependencies installation
 ``` pip install -r requirements.txt```
@@ -36,6 +45,17 @@ At the form send a json using the format: <br />
 ### Running Unit Tests at /api/tests.py
 At the main directory run:<br />
 ``` python manage.py test ```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
